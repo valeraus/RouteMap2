@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="app">
+
+    <div class="menu-bottom">
+        <button v-on:click="MenuShow()">Прокласти маршрут</button>
+    </div>
+
+    <div class="menu" v-bind:class="{active:show}">
+
+        <p>Знайти маршрут</p>
+        <input v-model.number ="id" />
+        <button v-on:click="BuiltRoute()">Побудувати маршрут</button>
+@*        <div>
+            <input v-model.number="origin.lat" />
+            <input v-model.number="origin.lng" />
+        </div>
+
+        <div>
+            <input v-model.number="destination.lat" />
+            <input v-model.number="destination.lng" />
+        </div>
+
+
+        <ul>
+            <li v-for="points in waypoints">
+                <input v-model.number="points.location.lat" />
+                <input v-model.number="points.location.lng" />
+            </li>
+        </ul>*@
+        <button v-on:click="AddWaypoint()">Додати точку</button>
+        <button v-on:click="RouteMap()">Показати на карті</button>
+    </div>
+
+    <div class="map" ref="map"></div>
+</div>
