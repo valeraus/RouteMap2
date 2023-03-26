@@ -1,6 +1,9 @@
 .map {
     height: 100%;
 }
+    .map.active {
+        border: 5px solid red;
+    }
 
 #app {
     height: calc(100vh - 100px);
@@ -23,6 +26,10 @@ body {
     width: 100%;
     z-index: 10;
 }
+    .menu-bottom.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
 
     .menu-bottom button {
         padding: 30px;

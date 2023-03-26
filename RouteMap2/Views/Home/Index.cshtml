@@ -1,38 +1,68 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Карти";
 }
 
 <div id="app">
 
-    <div class="menu-bottom">
+    <div class="menu-bottom" v-bind:class="{hide:edit}">
         <button v-on:click="MenuShow()">Прокласти маршрут</button>
+    </div>
+
+    <div class="menu-bottom" v-bind:class="{hide:!edit}">
+        <button v-on:click="RoteUprove()">Підтвердити маршрут</button>
     </div>
 
     <div class="menu" v-bind:class="{active:show}">
 
-        <p>Знайти маршрут</p>
-        <input v-model.number ="id" />
-        <button v-on:click="BuiltRoute()">Побудувати маршрут</button>
-@*        <div>
-            <input v-model.number="origin.lat" />
-            <input v-model.number="origin.lng" />
+        <section>
+            <div>Вибір транспорту: {{ picked }}</div>
+
+            <input type="radio" id="one" value="Авто" v-model="picked" />
+            <label for="one">Авто</label>
+
+            <input type="radio" id="two" value="Вело" v-model="picked" />
+            <label for="two">Вело</label>
+
+            <input type="radio" id="three" value="Громадський" v-model="picked" />
+            <label for="three">Громадський</label>
+
+        </section>
+        <p></p>
+        <p>Добавити точки маршруту</p>
+
+        @*        <div>
+        <input v-model.number="origin.lat" />
+        <input v-model.number="origin.lng" />
         </div>
 
         <div>
-            <input v-model.number="destination.lat" />
-            <input v-model.number="destination.lng" />
+        <input v-model.number="destination.lat" />
+        <input v-model.number="destination.lng" />
         </div>
 
 
         <ul>
-            <li v-for="points in waypoints">
-                <input v-model.number="points.location.lat" />
-                <input v-model.number="points.location.lng" />
-            </li>
+        <li v-for="points in waypoints">
+        <input v-model.number="points.location.lat" />
+        <input v-model.number="points.location.lng" />
+        </li>
         </ul>*@
-        <button v-on:click="AddWaypoint()">Додати точку</button>
-        <button v-on:click="RouteMap()">Показати на карті</button>
+
+        <section>
+            <p>Додати точку</p>
+            <p></p>
+            <button v-on:click="AddMarker()">Вручну</button>
+            <p></p>
+            <input v-model.number="id" />
+            <button v-on:click="BuiltRoute()">Побудувати маршрут</button>
+            <p></p>
+            <button v-on:click="AddWaypoint()">Завантажити із файлу</button>
+            <p></p>
+            <button v-on:click="AddWaypoint()">Завантажити із хмари</button>
+            <p></p>
+            <button v-on:click="RouteMap()">Показати на карті</button>
+        </section>
     </div>
 
-    <div class="map" ref="map"></div>
+    <div class="map" ref="map" v-bind:class="{active:edit}"></div>
 </div>
