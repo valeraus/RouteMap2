@@ -30,6 +30,15 @@
         InitMapElement() {
             return this.$refs.map;
         },
+
+        InitOriginElement() {
+            return this.$refs.origin;
+        },
+
+        InitDestinationElement() {
+            return this.$refs.destination;
+        },
+
         RouteMap() {
             var event = new CustomEvent("path-update", {
                 detail: {

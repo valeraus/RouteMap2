@@ -28,29 +28,39 @@
 
         </section>
         <p></p>
-        <p>Добавити точки маршруту</p>
-
-        @*        <div>
-        <input v-model.number="origin.lat" />
-        <input v-model.number="origin.lng" />
-        </div>
-
-        <div>
-        <input v-model.number="destination.lat" />
-        <input v-model.number="destination.lng" />
-        </div>
-
-
-        <ul>
-        <li v-for="points in waypoints">
-        <input v-model.number="points.location.lat" />
-        <input v-model.number="points.location.lng" />
-        </li>
-        </ul>*@
 
         <section>
             <p>Додати точку</p>
             <p></p>
+
+            <div style="display: inline">
+                <input id="origin-input"
+                       ref="origin"
+                       class="controls"
+                       type="text"
+                       placeholder="Введіть початкову точку" />
+
+                <input id="destination-input"
+                       ref="destination"
+                       class="controls"
+                       type="text"
+                       placeholder="Введіть наступну точку" />
+
+                <div id="mode-selector" class="controls">
+                    <input type="radio"
+                           name="type"
+                           id="changemode-walking"
+                           checked="checked" />
+                    <label for="changemode-walking">Пішки</label>
+
+                    <input type="radio" name="type" id="changemode-transit" />
+                    <label for="changemode-transit">Транспортом</label>
+
+                    <input type="radio" name="type" id="changemode-driving" />
+                    <label for="changemode-driving">Авто</label>
+                </div>
+            </div>
+
             <button v-on:click="AddMarker()">Вручну</button>
             <p></p>
             <input v-model.number="id" />
