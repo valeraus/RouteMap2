@@ -125,6 +125,9 @@ function initMap() {
                 return;
             }
 
+
+
+
             if (modificator === "ORIG") {
                 this.originPlaceId = place.place_id;
             } else {
