@@ -34,6 +34,10 @@ body {
     .menu-bottom button {
         padding: 30px;
     }
+.menu-button {
+    background-color: #bcbcbc;
+    margin: 20px 0px 20px 12px;
+}
 
 .menu {
     width: 60vw;

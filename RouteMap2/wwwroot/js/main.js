@@ -8,10 +8,14 @@
         destination: { lat: 50.48307483695035, lng: 30.39718793209465 },
         waypoints: [],
         id: 0,
-        picked: 'Авто',
-        lengthpath: 0
+        lengthpath: 0,
+        inputCount: 0
     },
     methods: {
+        AddFields() {
+            this.inputCount += 1;
+        },
+
         MenuShow() {
             if (this.show == true) {
                 this.show = false
@@ -19,13 +23,6 @@
             else {
                 this.show = true;
             }
-            //var event = new CustomEvent("view-info", {
-            //    detail: {
-            //        content: "Передали",
-            //        position: { lat: 50.44952836682165, lng: 30.600016080711644 },
-            //    }
-            //});
-            //this.$refs.map.dispatchEvent(event);
         },
         InitMapElement() {
             return this.$refs.map;
@@ -39,16 +36,29 @@
             return this.$refs.destination;
         },
 
+        InitTravelModeElement() {
+            return {
+                walking: this.$refs.travelModeWalking,
+                transit: this.$refs.travelModeTransit,
+                driving: this.$refs.travelModeDriving,
+            }
+        },
+
         RouteMap() {
             var event = new CustomEvent("path-update", {
-                detail: {
-                    origin: this.origin,
-                    destination: this.destination,
-                    waypoints: this.waypoints
-                }
+                detail: this.GetRouteData(),
             });
             this.$refs.map.dispatchEvent(event);
         },
+
+        GetRouteData() {
+            return {
+                origin: this.origin,
+                destination: this.destination,
+                waypoints: this.waypoints
+            }
+        },
+
         AddWaypoint() {
             this.waypoints.push({
                 location: { lat: 50.45464393234918, lng: 30.479264484049956 },
@@ -60,10 +70,10 @@
             params.append("id", this.id);
 
             axios.get("Home/GetRoute", { params }).then((response) => {
-                    this.origin = response.data.origin;
-                    this.destination = response.data.destination;
-                    this.waypoints = response.data.waypoints;
-                    this.RouteMap();
+                this.origin = response.data.origin;
+                this.destination = response.data.destination;
+                this.waypoints = response.data.waypoints;
+                this.RouteMap();
             })
         },
         AddMarker() {

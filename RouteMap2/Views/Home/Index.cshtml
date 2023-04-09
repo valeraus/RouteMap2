@@ -15,25 +15,25 @@
     <div class="menu" v-bind:class="{active:show}">
 
         <section>
-            <div>Вибір транспорту: {{ picked }}</div>
 
-            <input type="radio" id="one" value="Авто" v-model="picked" />
-            <label for="one">Авто</label>
+            <div id="mode-selector" class="controls">
+                <input type="radio"
+                       name="type"
+                       id="changemode-walking"
+                       checked="checked"
+                       ref="travelModeWalking" />
+                <label for="changemode-walking">Пішки</label>
 
-            <input type="radio" id="two" value="Вело" v-model="picked" />
-            <label for="two">Вело</label>
+                <input type="radio" name="type" id="changemode-transit" ref="travelModeTransit" />
+                <label for="changemode-transit">Транспортом</label>
 
-            <input type="radio" id="three" value="Громадський" v-model="picked" />
-            <label for="three">Громадський</label>
+                <input type="radio" name="type" id="changemode-driving" ref="travelModeDriving" />
+                <label for="changemode-driving">Авто</label>
+            </div>
 
-        </section>
-        <p></p>
-
-        <section>
-            <p>Додати точку</p>
-            <p></p>
-
-            <div style="display: inline">
+            <button class="menu-button" v-on:click="AddFields()">Додати точку</button>
+            
+            <div style="display: inblock">
                 <input id="origin-input"
                        ref="origin"
                        class="controls"
@@ -46,23 +46,21 @@
                        type="text"
                        placeholder="Введіть наступну точку" />
 
-                <div id="mode-selector" class="controls">
-                    <input type="radio"
-                           name="type"
-                           id="changemode-walking"
-                           checked="checked" />
-                    <label for="changemode-walking">Пішки</label>
-
-                    <input type="radio" name="type" id="changemode-transit" />
-                    <label for="changemode-transit">Транспортом</label>
-
-                    <input type="radio" name="type" id="changemode-driving" />
-                    <label for="changemode-driving">Авто</label>
+                <div v-for="index in inputCount">
+                    <input id="destination-input"
+                           ref="destination"
+                           class="controls"
+                           type="text"
+                           placeholder="Введіть наступну точку" />
                 </div>
+                <p></p>
+
             </div>
 
+            <p></p>
             <button v-on:click="AddMarker()">Вручну</button>
             <p></p>
+
             <input v-model.number="id" />
             <button v-on:click="BuiltRoute()">Побудувати маршрут</button>
             <p></p>
