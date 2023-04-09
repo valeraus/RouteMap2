@@ -124,7 +124,7 @@ function initMap() {
                 window.alert("Please select an option from the dropdown list.");
                 return;
             }
-            console.log(place.place_id);
+
             if (modificator === "ORIG") {
                 this.originPlaceId = place.place_id;
             } else {
